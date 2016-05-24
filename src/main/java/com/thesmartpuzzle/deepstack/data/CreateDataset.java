@@ -16,16 +16,12 @@ public class CreateDataset {
 
 	public static void main(String[] args) {
 
-		ArrayList<Object> results = new GSonConversion<Object>()
+		ArrayList<Result> results = new GSonConversion<Result>()
 				.readFolder("data/csnippex/");
-		for (Object r : results) {
-			// System.out.println(r.answerId);
-			// for(CompilationUnit unit : r.units) {
-			// System.out.println(unit.body);
-			// System.out.println("-----------------------------------");
-			// }
+		for (Result r : results) {
 			
-			// FIXME format answerId as LONG, not DOUBLE
+			System.out.println(r.answerId);
+			
 			
 			System.out.println("===================================");
 		}

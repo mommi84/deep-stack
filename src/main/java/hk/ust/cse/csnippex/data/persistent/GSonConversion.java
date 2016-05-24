@@ -54,20 +54,12 @@ public class GSonConversion<T> {
 		}
 	}
 
-	public ArrayList<T> readFolder(String folderP) {
+	public ArrayList<Result> readFolder(String folderP) {
 
-		ArrayList<T> set = new ArrayList<T>();
-		Gson gson = new GsonBuilder().registerTypeAdapter(Double.class,
-				new JsonSerializer<Double>() {
-
-					public JsonElement serialize(Double src, Type typeOfSrc,
-							JsonSerializationContext context) {
-						if (src == src.longValue())
-							return new JsonPrimitive(src.longValue());
-						return new JsonPrimitive(src);
-
-					}
-				}).create();
+		ArrayList<Result> set = new ArrayList<Result>();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+		final Gson gson = gsonBuilder.create();
 
 		// convert java object to JSON format,
 		// and returned as JSON formatted string
@@ -76,7 +68,7 @@ public class GSonConversion<T> {
 		for (final File f : folder.listFiles()) {
 
 			if (f.isDirectory()) {
-				ArrayList<T> set1;
+				ArrayList<Result> set1;
 				set1 = readFolder(f.getAbsolutePath());
 				set.addAll(set1);
 			}
@@ -88,8 +80,8 @@ public class GSonConversion<T> {
 				final BufferedReader br = new BufferedReader(new FileReader(f));
 
 				// convert the json string back to object
-				ArrayList<T> set1;
-				set1 = gson.fromJson(br, new TypeToken<ArrayList<T>>() {
+				ArrayList<Result> set1;
+				set1 = gson.fromJson(br, new TypeToken<ArrayList<Result>>() {
 				}.getType());
 				set.addAll(set1);
 
