@@ -13,6 +13,8 @@ public class RowHandler extends DefaultHandler {
 	private final RowProcessor processor;
 	private Row currentRow;
 	
+//	private long count = 0;
+	
 	public RowHandler(RowProcessor processor) {
 		super();
 		this.processor = processor;
@@ -23,6 +25,9 @@ public class RowHandler extends DefaultHandler {
 			Attributes attributes) throws SAXException {
 
 		currentRow = new Row(uri, localName, qName, attributes);
+		
+//		if(count > 5000000)
+//			throw new TerminatorException(qName);
 		
 	}
 
@@ -36,6 +41,7 @@ public class RowHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
 		processor.process(currentRow);
+//		count++;
 	}
 
 }

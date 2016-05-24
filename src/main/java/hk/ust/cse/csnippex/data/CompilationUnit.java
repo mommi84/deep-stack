@@ -27,7 +27,7 @@ public class CompilationUnit {
 
 	@Override
 	public String toString() {
-		return "MyCompilationUnit [packageDeclaration=" + packageDeclaration
+		return "CompilationUnit [packageDeclaration=" + packageDeclaration
 				+ ", imports=" + imports + ", body=" + body + ", className="
 				+ className + ", main=" + main + "]";
 	}

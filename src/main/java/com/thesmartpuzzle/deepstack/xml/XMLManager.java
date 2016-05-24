@@ -15,25 +15,30 @@ import org.xml.sax.SAXException;
  */
 public class XMLManager {
 
-    public static void load(String filename, RowProcessor processor) {
-    	
-        SAXParserFactory factory = SAXParserFactory.newInstance();
+	public static void load(String filename, RowProcessor processor) {
 
-        try {
+		SAXParserFactory factory = SAXParserFactory.newInstance();
 
-            SAXParser parser = factory.newSAXParser();
-            File file = new File(filename);
-            RowHandler rowHandler = new RowHandler(processor);
+		try {
 
-            parser.parse(file, rowHandler);
+			SAXParser parser = factory.newSAXParser();
+			File file = new File(filename);
+			RowHandler rowHandler = new RowHandler(processor);
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			parser.parse(file, rowHandler);
 
-    }
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			if (e instanceof TerminatorException) {
+				System.out.println("Force exit.");
+				return;
+			} else {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
