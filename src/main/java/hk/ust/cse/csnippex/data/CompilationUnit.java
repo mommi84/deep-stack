@@ -31,5 +31,28 @@ public class CompilationUnit {
 				+ ", imports=" + imports + ", body=" + body + ", className="
 				+ className + ", main=" + main + "]";
 	}
+	
+	public String getStringCode() {
+
+		String s = packageDeclaration;
+		if (imports != null)
+			for (final String line : imports) {
+				s = s + "\n" + line;
+			}
+		if(!main.equals("")){
+			if (body.contains("}"))
+				s = s+"\n"+ body.substring(0, body.lastIndexOf("}") - 1)
+				+ "\n"
+				+ "public static void main(String[] args) throws Exception {\n "
+				+ main + "\n} \n}";
+			else
+				s = s+"\n"+body
+				+ "public static void main(String[] args) throws Exception {\n "
+				+ main + "\n} \n}";
+		}else{
+			s = s+"\n"+body;
+		}
+		return s;
+	}
 
 }

@@ -41,7 +41,7 @@ public class CreateDataset {
 			i.setAnswerID(r.answerId);
 			StringBuilder sb = new StringBuilder();
 			for (CompilationUnit cu : r.units) {
-				sb.append(cu.body + "\n");
+				sb.append(cu.getStringCode() + "\n");
 			}
 			i.setAnswerSnippets(sb.toString());
 			answerIDs.put(r.answerId, i);
