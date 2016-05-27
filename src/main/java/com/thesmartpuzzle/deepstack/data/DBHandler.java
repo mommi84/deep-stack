@@ -3,6 +3,7 @@ package com.thesmartpuzzle.deepstack.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -58,7 +59,8 @@ public class DBHandler {
 	
 	public void close() {
 		try {
-			connect.commit();
+			if(!connect.getAutoCommit())
+				connect.commit();
 			connect.close();
 			System.out.println("Database connection closed ("+this.toString()+").");
 		} catch (SQLException e) {
@@ -96,6 +98,18 @@ public class DBHandler {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public ResultSet getQuestionsSnippets() {
+		try {
+			preparedStatement = connect.prepareStatement("SELECT text, snippet FROM question_snippet;");
+			return preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR IN " + preparedStatement);
+			e.printStackTrace();
+			return null;
 		}
 	}
 
