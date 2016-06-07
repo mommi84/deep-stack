@@ -15,7 +15,7 @@ public class SQLDataClean {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		PrintWriter pw = new PrintWriter(new File("question_snippet.clean.tsv"));
+		PrintWriter pw = new PrintWriter(new File("python/question_snippet.clean.tsv"));
 		Scanner in = new Scanner(new File("question_snippet.tsv"));
 		while(in.hasNextLine()) {
 			String[] line = in.nextLine().split("\t");
