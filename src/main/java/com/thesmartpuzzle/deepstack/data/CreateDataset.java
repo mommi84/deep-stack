@@ -133,10 +133,10 @@ public class CreateDataset {
 		pw.close();
 		db.close();
 
-		PrintWriter pw2 = new PrintWriter(new File("questionsToInstances.output.txt"));
-		for (Entry<Long, TreeSet<Instance>> e : questionsToInstances.entrySet())
-			pw2.println(e);
-		pw2.close();
+//		PrintWriter pw2 = new PrintWriter(new File("questionsToInstances.output.txt"));
+//		for (Entry<Long, TreeSet<Instance>> e : questionsToInstances.entrySet())
+//			pw2.println(e);
+//		pw2.close();
 
 	}
 	
